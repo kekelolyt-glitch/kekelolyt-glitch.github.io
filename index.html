@@ -1,52 +1,186 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="tr">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KekeIntel Panel v1</title>
 
-<title>KekeIntel</title>
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #0d0f14;
+    color: white;
+}
 
-<link rel="stylesheet" href="style.css">
+/* LOGIN */
+#loginBox {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #151922;
+    padding: 30px;
+    border-radius: 12px;
+    width: 300px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.6);
+}
 
+input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 6px;
+    background: #0d0f14;
+    color: white;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 6px;
+    background: #4f7cff;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #3a63ff;
+}
+
+/* DASHBOARD */
+#dashboard {
+    display: none;
+    height: 100vh;
+    display: flex;
+}
+
+.sidebar {
+    width: 220px;
+    background: #111521;
+    padding: 20px;
+}
+
+.sidebar h2 {
+    color: #4f7cff;
+}
+
+.menu {
+    margin-top: 20px;
+}
+
+.menu div {
+    padding: 10px;
+    margin: 5px 0;
+    background: #1a2030;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.menu div:hover {
+    background: #27314a;
+}
+
+.main {
+    flex: 1;
+    padding: 20px;
+}
+
+.card {
+    background: #151922;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+</style>
 </head>
-
 
 <body>
 
-
-<div class="login">
-
-
-<h1>KekeIntel</h1>
-
-<p>Panel Login</p>
-
-
-<input 
-id="user"
-placeholder="Username">
-
-
-<input 
-id="pass"
-type="password"
-placeholder="Password">
-
-
-
-<button onclick="login()">
-Giriş Yap
-</button>
-
-
-
+<!-- LOGIN -->
+<div id="loginBox">
+    <h2>KekeIntel Login</h2>
+    <input id="user" placeholder="Username">
+    <input id="pass" type="password" placeholder="Password">
+    <button onclick="login()">Giriş Yap</button>
+    <p id="error" style="color:red;"></p>
 </div>
 
+<!-- DASHBOARD -->
+<div id="dashboard">
+    <div class="sidebar">
+        <h2>KekeIntel</h2>
+        <div class="menu">
+            <div onclick="show('home')">Home</div>
+            <div onclick="show('tools')">Tools</div>
+            <div onclick="show('api')">API Status</div>
+            <div onclick="logout()">Logout</div>
+        </div>
+    </div>
 
+    <div class="main" id="content">
+        <h2>Dashboard</h2>
 
-<script src="app.js"></script>
+        <div class="card">
+            🟢 Sistem Durumu: Aktif
+        </div>
 
+        <div class="card">
+            🔵 API Status: Online
+        </div>
+
+        <div class="card">
+            👤 Kullanıcı: Admin Panel
+        </div>
+    </div>
+</div>
+
+<script>
+function login() {
+    let u = document.getElementById("user").value;
+    let p = document.getElementById("pass").value;
+
+    if(u === "admin" && p === "admin") {
+        document.getElementById("loginBox").style.display = "none";
+        document.getElementById("dashboard").style.display = "flex";
+    } else {
+        document.getElementById("error").innerText = "Hatalı giriş!";
+    }
+}
+
+function logout() {
+    location.reload();
+}
+
+function show(page) {
+    let content = document.getElementById("content");
+
+    if(page === "home") {
+        content.innerHTML = `
+        <h2>Dashboard</h2>
+        <div class="card">🟢 Sistem Durumu: Aktif</div>
+        <div class="card">🔵 API Status: Online</div>
+        <div class="card">👤 Kullanıcı: Admin Panel</div>`;
+    }
+
+    if(page === "tools") {
+        content.innerHTML = `
+        <h2>Tools</h2>
+        <div class="card">IP Checker (mock)</div>
+        <div class="card">Email Validator (mock)</div>`;
+    }
+
+    if(page === "api") {
+        content.innerHTML = `
+        <h2>API Status</h2>
+        <div class="card">🟢 Main API: Online</div>
+        <div class="card">🟢 Backup API: Online</div>`;
+    }
+}
+</script>
 
 </body>
-
-
 </html>
