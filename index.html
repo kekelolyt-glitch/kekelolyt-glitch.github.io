@@ -171,12 +171,13 @@ button:hover{
 
         <h2>KekeIntel</h2>
 
-        <div class="menu">
-            <div onclick="showPage('home')">🏠 Dashboard</div>
-            <div onclick="showPage('tools')">🛠 Tools</div>
-            <div onclick="showPage('api')">📡 API Status</div>
-            <div onclick="logout()">🚪 Logout</div>
-        </div>
+<div class="menu">
+    <div onclick="showPage('home')">🏠 Dashboard</div>
+    <div onclick="showPage('iplookup')">🌐 IP Lookup</div>
+    <div onclick="showPage('email')">📧 Email Validator</div>
+    <div onclick="showPage('api')">📡 API Status</div>
+    <div onclick="logout()">🚪 Logout</div>
+</div>
 
     </div>
 
@@ -227,12 +228,32 @@ function showPage(page){
         <div class="card">👤 Kullanıcı: Admin</div>`;
     }
 
-    if(page==="tools"){
+    if(page==="iplookup"){
         content.innerHTML=`
-        <h2>Tools</h2>
-        <div class="card">IP Lookup</div>
-        <div class="card">Domain Lookup</div>
-        <div class="card">DNS Checker</div>`;
+        <h2>🌐 IP Lookup</h2>
+
+        <div class="card">
+            <input id="ipInput" placeholder="8.8.8.8">
+            <button onclick="lookupIP()">Sorgula</button>
+        </div>
+
+        <div class="card" id="ipResult">
+            Sonuç burada görünecek.
+        </div>`;
+    }
+
+    if(page==="email"){
+        content.innerHTML=`
+        <h2>📧 Email Validator</h2>
+
+        <div class="card">
+            <input id="emailInput" placeholder="example@gmail.com">
+            <button onclick="validateEmail()">Kontrol Et</button>
+        </div>
+
+        <div class="card" id="emailResult">
+            Sonuç burada görünecek.
+        </div>`;
     }
 
     if(page==="api"){
