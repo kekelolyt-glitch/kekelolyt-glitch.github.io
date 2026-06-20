@@ -1,177 +1,229 @@
+```html
 <!DOCTYPE html>
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KekeIntel Panel v1</title>
+<title>KekeIntel Panel</title>
 
 <style>
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #0d0f14;
-    color: white;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial, sans-serif;
+    background:#0d0f14;
+    color:#fff;
+    overflow:hidden;
 }
 
 /* LOGIN */
-#loginBox {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: #151922;
-    padding: 30px;
-    border-radius: 12px;
-    width: 300px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.6);
+
+#loginBox{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    width:380px;
+    background:#151922;
+    border-radius:16px;
+    padding:20px;
+    box-shadow:0 0 30px rgba(0,0,0,.7);
 }
 
-input {
-    width: calc(100% - 20px);
-    padding: 10px;
-    margin-top: 10px;
-    border: none;
-    border-radius: 6px;
-    background: #0d0f14;
-    color: white;
+.login-banner{
+    width:100%;
+    height:160px;
+    object-fit:cover;
+    border-radius:12px;
+    margin-bottom:18px;
+    filter:grayscale(100%) contrast(130%);
 }
 
-button {
-    width: 100%;
-    padding: 10px;
-    margin-top: 15px;
-    border: none;
-    border-radius: 6px;
-    background: #4f7cff;
-    color: white;
-    cursor: pointer;
+#loginBox h2{
+    text-align:center;
+    margin-bottom:15px;
+    color:#4f7cff;
 }
 
-button:hover {
-    background: #3a63ff;
+input{
+    width:100%;
+    padding:12px;
+    margin-top:10px;
+    border:none;
+    border-radius:8px;
+    background:#0d0f14;
+    color:white;
+    outline:none;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    margin-top:15px;
+    border:none;
+    border-radius:8px;
+    background:#4f7cff;
+    color:white;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+button:hover{
+    background:#365eff;
+}
+
+#error{
+    margin-top:10px;
+    color:#ff4d4d;
+    text-align:center;
 }
 
 /* DASHBOARD */
-#dashboard {
-    display: none;
-    height: 100vh;
+
+#dashboard{
+    display:none;
+    height:100vh;
 }
 
-.sidebar {
-    width: 220px;
-    background: #111521;
-    padding: 20px;
+.sidebar{
+    width:240px;
+    background:#111521;
+    padding:20px;
 }
 
-.sidebar h2 {
-    color: #4f7cff;
+.sidebar h2{
+    color:#4f7cff;
+    margin-bottom:20px;
 }
 
-.menu {
-    margin-top: 20px;
+.menu div{
+    background:#1a2030;
+    padding:12px;
+    border-radius:8px;
+    margin-bottom:8px;
+    cursor:pointer;
 }
 
-.menu div {
-    padding: 10px;
-    margin: 5px 0;
-    background: #1a2030;
-    border-radius: 6px;
-    cursor: pointer;
+.menu div:hover{
+    background:#27314a;
 }
 
-.menu div:hover {
-    background: #27314a;
+.main{
+    flex:1;
+    padding:25px;
 }
 
-.main {
-    flex: 1;
-    padding: 20px;
-}
-
-.card {
-    background: #151922;
-    padding: 15px;
-    border-radius: 10px;
-    margin-bottom: 15px;
+.card{
+    background:#151922;
+    padding:18px;
+    border-radius:12px;
+    margin-bottom:15px;
 }
 </style>
 </head>
-
 <body>
 
 <div id="loginBox">
+
+    <!-- Göz görseli -->
+    <img src="eyes.jpg" class="login-banner" alt="Eyes">
+
     <h2>KekeIntel Login</h2>
+
     <input id="user" placeholder="Username">
     <input id="pass" type="password" placeholder="Password">
+
     <button onclick="login()">Giriş Yap</button>
-    <p id="error" style="color:red;"></p>
+
+    <p id="error"></p>
+
 </div>
 
 <div id="dashboard">
+
     <div class="sidebar">
+
         <h2>KekeIntel</h2>
+
         <div class="menu">
-            <div onclick="show('home')">Home</div>
-            <div onclick="show('tools')">Tools</div>
-            <div onclick="show('api')">API Status</div>
-            <div onclick="logout()">Logout</div>
+            <div onclick="showPage('home')">🏠 Dashboard</div>
+            <div onclick="showPage('tools')">🛠 Tools</div>
+            <div onclick="showPage('api')">📡 API Status</div>
+            <div onclick="logout()">🚪 Logout</div>
         </div>
+
     </div>
 
     <div class="main" id="content">
+
         <h2>Dashboard</h2>
+
         <div class="card">🟢 Sistem Durumu: Aktif</div>
         <div class="card">🔵 API Status: Online</div>
-        <div class="card">👤 Kullanıcı: Admin Panel</div>
+        <div class="card">👤 Kullanıcı: Admin</div>
+
     </div>
+
 </div>
 
 <script>
-function login() {
-    const u = document.getElementById("user").value.trim();
-    const p = document.getElementById("pass").value.trim();
 
-    if (u === "admin" && p === "admin") {
-        document.getElementById("loginBox").style.display = "none";
-        document.getElementById("dashboard").style.display = "flex";
-    } else {
-        document.getElementById("error").textContent = "Hatalı giriş!";
+function login(){
+
+    const user=document.getElementById("user").value.trim();
+    const pass=document.getElementById("pass").value.trim();
+
+    if(user==="admin" && pass==="admin"){
+
+        document.getElementById("loginBox").style.display="none";
+
+        const dash=document.getElementById("dashboard");
+        dash.style.display="flex";
+
+    }else{
+
+        document.getElementById("error").innerText="Hatalı giriş!";
     }
 }
 
-function logout() {
+function logout(){
     location.reload();
 }
 
-function show(page) {
-    const content = document.getElementById("content");
+function showPage(page){
 
-    if (page === "home") {
-        content.innerHTML = `
-            <h2>Dashboard</h2>
-            <div class="card">🟢 Sistem Durumu: Aktif</div>
-            <div class="card">🔵 API Status: Online</div>
-            <div class="card">👤 Kullanıcı: Admin Panel</div>
-        `;
+    const content=document.getElementById("content");
+
+    if(page==="home"){
+        content.innerHTML=`
+        <h2>Dashboard</h2>
+        <div class="card">🟢 Sistem Durumu: Aktif</div>
+        <div class="card">🔵 API Status: Online</div>
+        <div class="card">👤 Kullanıcı: Admin</div>`;
     }
 
-    if (page === "tools") {
-        content.innerHTML = `
-            <h2>Tools</h2>
-            <div class="card">IP Checker (mock)</div>
-            <div class="card">Email Validator (mock)</div>
-        `;
+    if(page==="tools"){
+        content.innerHTML=`
+        <h2>Tools</h2>
+        <div class="card">IP Lookup</div>
+        <div class="card">Domain Lookup</div>
+        <div class="card">DNS Checker</div>`;
     }
 
-    if (page === "api") {
-        content.innerHTML = `
-            <h2>API Status</h2>
-            <div class="card">🟢 Main API: Online</div>
-            <div class="card">🟢 Backup API: Online</div>
-        `;
+    if(page==="api"){
+        content.innerHTML=`
+        <h2>API Status</h2>
+        <div class="card">🟢 Main API Online</div>
+        <div class="card">🟢 Backup API Online</div>`;
     }
 }
+
 </script>
 
 </body>
 </html>
+```
