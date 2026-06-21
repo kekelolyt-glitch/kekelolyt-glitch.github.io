@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>KekeIntel Panel - Restore</title>
+<meta charset="UTF-8">
+<title>KekeIntel Restore Panel</title>
 
 <style>
 body{
@@ -18,8 +17,6 @@ width:240px;
 height:100vh;
 background:#111521;
 position:fixed;
-top:0;
-left:0;
 padding:20px;
 }
 
@@ -36,7 +33,6 @@ border:none;
 color:#fff;
 cursor:pointer;
 border-radius:8px;
-transition:0.2s;
 }
 
 .btn:hover{
@@ -60,11 +56,10 @@ input{
 width:100%;
 padding:10px;
 margin-top:10px;
-border-radius:6px;
-border:none;
-outline:none;
 background:#0f1320;
+border:none;
 color:#fff;
+border-radius:6px;
 }
 </style>
 </head>
@@ -74,69 +69,53 @@ color:#fff;
 <div class="sidebar">
 <h2>KekeIntel</h2>
 
-<button class="btn" onclick="showPage('dashboard')">Dashboard</button>
-<button class="btn" onclick="showPage('scanner')">Username Scanner</button>
-<button class="btn" onclick="showPage('discord')">Discord ID Scanner</button>
-<button class="btn" onclick="showPage('settings')">Settings</button>
+<button class="btn" onclick="show('dash')">Dashboard</button>
+<button class="btn" onclick="show('scan')">Discord Scanner</button>
 </div>
 
 <div class="main">
 
-<div id="dashboard" class="page">
+<div id="dash">
 <h1>Dashboard</h1>
-<div class="card">System Status: <span style="color:#00ff88">ACTIVE</span></div>
+<div class="card">Status: <span style="color:#00ff88">ACTIVE</span></div>
 </div>
 
-<div id="scanner" class="page" style="display:none;">
-<h1>Username Scanner</h1>
-<input id="usernameInput" placeholder="Username gir...">
-<button class="btn" onclick="runUsernameScan()">ARA</button>
-<div class="card" id="scanResult">Sonuç bekleniyor...</div>
-</div>
-
-<div id="discord" class="page" style="display:none;">
+<div id="scan" style="display:none;">
 <h1>Discord ID Scanner</h1>
-<input id="discordInput" placeholder="Discord ID gir...">
-<button class="btn" onclick="runDiscordScan()">TARA</button>
-<div class="card" id="discordResult">Sonuç bekleniyor...</div>
-</div>
 
-<div id="settings" class="page" style="display:none;">
-<h1>Settings</h1>
-<div class="card">Theme: Dark Mode (Locked)</div>
+<input id="id" placeholder="Discord ID gir">
+<button class="btn" onclick="scan()">SORGULA</button>
+
+<div class="card" id="out">Sonuç bekleniyor...</div>
 </div>
 
 </div>
 
 <script>
 
-function showPage(page){
-document.querySelectorAll('.page').forEach(p => p.style.display = "none");
-document.getElementById(page).style.display = "block";
+function show(id){
+document.getElementById("dash").style.display="none";
+document.getElementById("scan").style.display="none";
+document.getElementById(id).style.display="block";
 }
 
-function runUsernameScan(){
-let user = document.getElementById("usernameInput").value;
-
-if(!user){
-document.getElementById("scanResult").innerText = "Username gir!";
-return;
-}
-
-document.getElementById("scanResult").innerText =
-"Scanning: " + user + " ... (mock result)\nInstagram: found\nTikTok: checking...\nDiscord: not found";
-}
-
-function runDiscordScan(){
-let id = document.getElementById("discordInput").value;
+async function scan(){
+let id = document.getElementById("id").value;
 
 if(!id){
-document.getElementById("discordResult").innerText = "ID gir!";
+document.getElementById("out").innerText = "ID gir!";
 return;
 }
 
-document.getElementById("discordResult").innerText =
-"Scanning Discord ID: " + id + "\nStatus: VALID (mock)\nData: limited access";
+let res = await fetch("/api/discord?id=" + id);
+let data = await res.json();
+
+document.getElementById("out").innerText =
+"ID: " + data.id + "\n" +
+"Username: " + data.username + "\n" +
+"Tag: " + data.tag + "\n" +
+"Created: " + data.created + "\n" +
+"Status: " + data.status;
 }
 
 </script>
