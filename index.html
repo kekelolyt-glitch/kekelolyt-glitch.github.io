@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>KEKEINTEL V6</title>
+
+<style>
+body{
+margin:0;
+font-family:Arial;
+background:#000;
+color:#0ff;
+}
+
+#panel{
+display:flex;
+height:100vh;
+}
+
+.sidebar{
+width:260px;
+background:#050505;
+padding:20px;
+border-right:1px solid #0ff3;
+}
+
+.menu div{
+padding:12px;
+margin:8px 0;
+background:#111;
+cursor:pointer;
+}
+
+.main{
+flex:1;
+padding:20px;
+overflow:auto;
+}
+
+.card{
+background:#0b0b0b;
+border:1px solid #0ff3;
+padding:15px;
+margin-top:10px;
+}
+
+input,button{
+width:100%;
+padding:10px;
+margin-top:8px;
+background:#111;
+color:#0ff;
+border:1px solid #0ff3;
+}
+</style>
+</head>
+
+<body>
+
+<div id="panel">
+
+<div class="sidebar">
+<h3>CYBER INTEL</h3>
+
+<div class="menu">
+<div onclick="load('ip')">IP</div>
+<div onclick="load('dns')">DNS</div>
+<div onclick="load('whois')">WHOIS</div>
+<div onclick="load('github')">GITHUB</div>
+</div>
+
+</div>
+
+<div class="main" id="view"></div>
+
+</div>
+
+<script>
+
+function load(t){
+
+if(t==="ip"){
+view.innerHTML=`
+<h2>IP INTEL</h2>
+<input id="ip">
+<button onclick="ipScan()">SCAN</button>
+<div id="r"></div>
+`;
+}
+
+if(t==="dns"){
+view.innerHTML=`
+<h2>DNS</h2>
+<input id="dns">
+<button onclick="dnsScan()">SCAN</button>
+<div id="r"></div>
+`;
+}
+
+if(t==="whois"){
+view.innerHTML=`
+<h2>WHOIS</h2>
+<input id="whois">
+<button onclick="whoisScan()">SCAN</button>
+<div id="r"></div>
+`;
+}
+
+if(t==="github"){
+view.innerHTML=`
+<h2>GITHUB</h2>
+<input id="gh">
+<button onclick="ghScan()">SCAN</button>
+<div id="r"></div>
+`;
+}
+
+}
+
+/* API CALLS */
+
+async function ipScan(){
+let r=await fetch("/api/ip/"+ip.value);
+r=await r.json();
+document.getElementById("r").innerHTML=JSON.stringify(r,null,2);
+}
+
+async function dnsScan(){
+let r=await fetch("/api/dns/"+dns.value);
+r=await r.json();
+document.getElementById("r").innerHTML=JSON.stringify(r.Answer||r);
+}
+
+async function whoisScan(){
+let r=await fetch("/api/whois/"+whois.value);
+r=await r.json();
+document.getElementById("r").innerHTML=JSON.stringify(r,null,2);
+}
+
+async function ghScan(){
+let r=await fetch("/api/github/"+gh.value);
+r=await r.json();
+document.getElementById("r").innerHTML=JSON.stringify(r,null,2);
+}
+
+</script>
+
+</body>
+</html>
