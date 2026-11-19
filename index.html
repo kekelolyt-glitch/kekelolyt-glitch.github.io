@@ -19,7 +19,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Plus+Jakarta+Sans:ital,wght@0,400;0,600;0,700;0,800;1,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Plus+Jakarta+Sans:ital,wght@0,400;0,600;0,700;0,800;1,700;1,800&display=swap" rel="stylesheet">
 
 <style>
 /* ============================================================
@@ -151,24 +151,8 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:400;line-height:1.05;letter-s
 .on-dark .btn-ghost:hover{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.5)}
 
 /* ============================================================
-   3. NAVBAR
+   3. NAVBAR  (koyu şerit · ortada pill menü · sağda DOWNLOAD NOW)
    ============================================================ */
-.nav{
-  position:fixed;inset:0 0 auto 0;height:var(--nav);z-index:100;
-  display:flex;align-items:center;
-  background:rgba(255,250,241,.72);
-  backdrop-filter:blur(16px) saturate(1.4);
-  -webkit-backdrop-filter:blur(16px) saturate(1.4);
-  border-bottom:1px solid transparent;
-  transition:border-color .3s, background .3s, box-shadow .3s;
-}
-.nav.scrolled{
-  background:rgba(255,250,241,.92);
-  border-bottom-color:var(--line);
-  box-shadow:0 1px 0 rgba(18,14,34,.04), 0 8px 22px -18px rgba(18,14,34,.5);
-}
-.nav .wrap{display:flex;align-items:center;gap:26px;height:100%}
-
 .brand{display:flex;align-items:center;gap:11px;flex:none}
 .brand .mark{
   width:40px;height:40px;border-radius:13px;overflow:hidden;flex:none;
@@ -182,166 +166,238 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:400;line-height:1.05;letter-s
 }
 .brand b span{color:var(--red)}
 
-.links{display:flex;align-items:center;gap:4px;margin-left:auto}
-.links a{
-  font-size:15px;font-weight:700;color:var(--ink-3);
-  padding:9px 14px;border-radius:10px;
-  transition:color .18s, background .18s;
+.nav{
+  position:fixed;inset:0 0 auto 0;height:var(--nav);z-index:100;
+  display:flex;align-items:center;color:#fff;
+  background:linear-gradient(180deg,rgba(24,4,9,.95),rgba(24,4,9,.8));
+  backdrop-filter:blur(14px) saturate(1.3);
+  -webkit-backdrop-filter:blur(14px) saturate(1.3);
+  border-bottom:1px solid rgba(255,255,255,.07);
+  transition:background .3s, box-shadow .3s;
 }
-.links a:hover{color:var(--ink);background:rgba(18,14,34,.055)}
-.links a.active{color:var(--red)}
-.links a.active::after{
-  content:"";display:block;height:2.5px;border-radius:2px;background:var(--red);
-  margin-top:5px;
+.nav.scrolled{background:rgba(20,3,8,.96);box-shadow:0 16px 30px -20px rgba(0,0,0,.9)}
+.nav .wrap{
+  max-width:1320px;height:100%;gap:20px;
+  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
 }
 
-.nav-cta{display:flex;align-items:center;gap:12px;flex:none}
-.nav-dl{
-  display:inline-flex;align-items:center;gap:9px;
-  font-family:var(--display);font-size:16.5px;color:#fff;
-  padding:10px 20px;border-radius:999px;
-  background:linear-gradient(180deg,#ff3c56,var(--red) 60%,#c80025);
-  box-shadow:0 4px 0 var(--red-d), 0 10px 20px -10px rgba(228,0,43,.8);
-  transition:transform .14s, box-shadow .14s;
+/* sol: sadece logo */
+.nav .brand{justify-self:start}
+.nav .brand .mark{width:auto;height:38px;border-radius:0;overflow:visible;background:none;box-shadow:none}
+.nav .brand .mark img{width:auto;height:100%;object-fit:contain}
+.nav .brand b{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.nav .brand.no-logo b{position:static;width:auto;height:auto;clip:auto;color:#fff}
+.nav .brand.no-logo .mark{display:none}
+
+/* orta: pill menü */
+.links{
+  display:flex;align-items:center;gap:4px;justify-self:center;
+  padding:5px;border-radius:999px;
+  background:rgba(14,3,8,.74);
+  border:1px solid rgba(255,255,255,.1);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05);
 }
-.nav-dl:hover{transform:translateY(-2px);box-shadow:0 6px 0 var(--red-d), 0 14px 24px -10px rgba(228,0,43,.85)}
-.nav-dl:active{transform:translateY(2px);box-shadow:0 1px 0 var(--red-d)}
-.nav-dl svg{width:17px;height:17px;fill:currentColor}
-.nav-dl small{font-family:var(--body);font-weight:800;font-size:11px;opacity:.82;letter-spacing:.02em}
+.links a{
+  font-size:12px;font-weight:800;letter-spacing:.11em;text-transform:uppercase;
+  color:rgba(255,255,255,.74);
+  padding:10px 22px;border-radius:999px;
+  transition:color .18s, background .18s, box-shadow .18s;
+}
+.links a:hover{color:#fff;background:rgba(255,255,255,.08)}
+.links a.active{
+  color:#fff;
+  background:linear-gradient(180deg,#ff3a52,var(--red) 70%,#c80025);
+  box-shadow:0 6px 18px -6px rgba(255,40,70,.85), inset 0 1px 0 rgba(255,255,255,.35);
+}
+
+/* sağ: PC RELEASE / DOWNLOAD NOW */
+.nav-cta{display:flex;align-items:center;justify-content:flex-end;gap:12px;flex:none;justify-self:end}
+.nav-dl{
+  display:flex;flex-direction:column;align-items:center;gap:2px;
+  padding:8px 24px 9px;border-radius:12px;text-align:center;line-height:1.1;
+  color:#fff;
+  background:linear-gradient(180deg,#ff3550,var(--red) 62%,#c00024);
+  border:1px solid rgba(255,255,255,.32);
+  box-shadow:0 8px 22px -8px rgba(255,30,60,.8), inset 0 1px 0 rgba(255,255,255,.3);
+  transition:transform .16s var(--ease), box-shadow .16s var(--ease);
+}
+.nav-dl:hover{transform:translateY(-2px);box-shadow:0 12px 26px -8px rgba(255,30,60,.9), inset 0 1px 0 rgba(255,255,255,.3)}
+.nav-dl:active{transform:translateY(1px)}
+.nav-dl small{font-size:8.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;opacity:.82}
+.nav-dl strong{font-family:var(--body);font-size:13.5px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;white-space:nowrap}
 
 .burger{display:none;width:42px;height:42px;border-radius:11px;place-items:center;
-  background:rgba(18,14,34,.06);flex:none}
-.burger svg{width:22px;height:22px;fill:var(--ink)}
+  background:rgba(255,255,255,.09);flex:none}
+.burger svg{width:22px;height:22px;fill:#fff}
 
 /* ============================================================
-   4. HERO
+   4. HERO  (kırmızı → turuncu parıltı · kart yelpazesi · büyük logo)
    ============================================================ */
 .hero{
+  --cx:53%; --cy:53%;
   position:relative;isolation:isolate;overflow:hidden;
-  padding-top:calc(var(--nav) + clamp(48px,7vw,86px));
-  padding-bottom:clamp(56px,7vw,92px);
+  min-height:clamp(620px,100svh,920px);
+  display:flex;align-items:center;
+  padding-top:calc(var(--nav) + 28px);
+  padding-bottom:56px;
+  color:#fff;
   background:
-    radial-gradient(ellipse 70% 60% at 78% 8%,rgba(255,120,40,.34),transparent 60%),
-    radial-gradient(ellipse 60% 55% at 12% 20%,rgba(228,0,43,.42),transparent 62%),
-    radial-gradient(ellipse 90% 70% at 50% 108%,rgba(123,47,247,.22),transparent 65%),
-    linear-gradient(170deg,#1a0f22 0%,#120e22 45%,#0d0a1a 100%);
-  color:#fdf8ef;
+    radial-gradient(ellipse 34% 58% at var(--cx) var(--cy),rgba(255,226,90,.95),rgba(255,160,24,.78) 38%,rgba(255,110,20,0) 74%),
+    radial-gradient(ellipse 70% 92% at 64% 56%,#ff8a1a 0%,#f0450f 44%,transparent 80%),
+    linear-gradient(100deg,#7a0610 0%,#bb1015 36%,#dc3a0c 72%,#8e0b10 100%);
 }
-.hero::before{ /* ince ızgara dokusu */
-  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
-  background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),
-                   linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);
-  background-size:64px 64px;
-  mask-image:radial-gradient(ellipse 85% 75% at 50% 40%,#000 25%,transparent 78%);
-  -webkit-mask-image:radial-gradient(ellipse 85% 75% at 50% 40%,#000 25%,transparent 78%);
-}
-.hero::after{ /* alt geçiş */
-  content:"";position:absolute;left:0;right:0;bottom:-1px;height:90px;z-index:1;pointer-events:none;
-  background:linear-gradient(transparent,var(--paper));
+.hero::before{ /* kenar karartma + üstten navbar gölgesi */
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:
+    linear-gradient(180deg,rgba(18,2,6,.55),transparent 22%),
+    linear-gradient(0deg,rgba(40,0,8,.5),transparent 26%),
+    radial-gradient(ellipse 120% 100% at 50% 50%,transparent 52%,rgba(40,0,10,.5) 100%);
 }
 
-.hero-grid{
-  display:grid;grid-template-columns:minmax(0,1.02fr) minmax(0,.98fr);
-  gap:clamp(30px,4vw,58px);align-items:center;
+/* --- sahne: halkalar, kartlar, logo --- */
+.stage{position:absolute;inset:0;z-index:1;pointer-events:none}
+.ring{
+  position:absolute;left:var(--cx);top:var(--cy);translate:-50% -50%;
+  border-radius:50%;aspect-ratio:1;
+  border:2px solid rgba(255,226,140,.22);
 }
-.hero-copy{position:relative;z-index:3;max-width:620px}
-
-.pill{
-  display:inline-flex;align-items:center;gap:9px;
-  padding:7px 15px 7px 11px;border-radius:999px;
-  background:rgba(255,255,255,.07);
-  border:1px solid rgba(255,255,255,.16);
-  backdrop-filter:blur(8px);
-  font-size:13px;font-weight:800;letter-spacing:.02em;color:#ffdfd3;
-}
-.pill .dot{
-  width:7px;height:7px;border-radius:50%;background:#4ee07a;flex:none;
-  box-shadow:0 0 0 0 rgba(78,224,122,.7);animation:ping 2.4s ease-out infinite;
-}
-@keyframes ping{70%,100%{box-shadow:0 0 0 8px rgba(78,224,122,0)}}
-.pill b{color:#fff;font-weight:800}
-.pill .sep{width:1px;height:12px;background:rgba(255,255,255,.22)}
-
-.hero h1{margin:22px 0 20px;font-size:clamp(40px,5.05vw,64px);line-height:1.02}
-.hero h1 em{
-  font-style:normal;
-  background:linear-gradient(105deg,#ffe066,var(--yellow) 32%,#ffa41c 68%,#ff6a3d);
-  -webkit-background-clip:text;background-clip:text;color:transparent;
-}
-.hero .lead{color:rgba(253,248,239,.76);font-size:clamp(16px,1.55vw,18.5px)}
-
-.hero-actions{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-top:32px}
-.hero-note{
-  display:flex;flex-wrap:wrap;align-items:center;gap:8px 18px;
-  margin-top:20px;font-size:13.5px;font-weight:700;color:rgba(253,248,239,.62);
-}
-.hero-note span{display:inline-flex;align-items:center;gap:6px}
-.hero-note svg{width:15px;height:15px;fill:var(--green);flex:none;opacity:.95}
-
-/* --- hero görseli --- */
-.hero-art{position:relative;z-index:2;display:grid;place-items:center}
-.art-glow{
-  position:absolute;inset:-14% -6%;z-index:-1;
-  background:radial-gradient(circle at 50% 50%,rgba(255,106,43,.55),rgba(228,0,43,.28) 42%,transparent 68%);
-  filter:blur(28px);animation:breathe 8s ease-in-out infinite;
-}
-@keyframes breathe{50%{opacity:.75;scale:1.05}}
-
-.art-frame{
-  position:relative;width:100%;border-radius:var(--r-xl);
-  padding:9px;
-  background:linear-gradient(150deg,rgba(255,255,255,.34),rgba(255,255,255,.06) 40%,rgba(255,255,255,.18));
-  box-shadow:0 40px 80px -32px rgba(0,0,0,.85), 0 0 0 1px rgba(255,255,255,.1);
-  rotate:1.6deg;
-  transition:rotate .5s var(--ease), translate .5s var(--ease);
-}
-.art-frame:hover{rotate:.4deg;translate:0 -6px}
-.art-frame img{
-  width:100%;border-radius:calc(var(--r-xl) - 9px);
-  aspect-ratio:716/333;object-fit:cover;
-  box-shadow:inset 0 0 0 1px rgba(255,255,255,.14);
+.ring.r1{width:44%}
+.ring.r2{width:62%;border-color:rgba(255,226,140,.15)}
+.ring.r3{width:82%;border-color:rgba(255,226,140,.09)}
+.sweep{
+  position:absolute;left:var(--cx);top:var(--cy);translate:-50% -50%;
+  width:92%;aspect-ratio:1;border-radius:50%;
+  background:conic-gradient(from 205deg,transparent 0 28%,rgba(255,214,90,.3) 38%,transparent 47% 100%);
+  filter:blur(14px);
 }
 
-/* yüzen mini kartlar */
-.fcard{
-  position:absolute;width:var(--w,62px);aspect-ratio:5/7;border-radius:11px;
-  background:var(--c);border:3px solid #fff;
-  box-shadow:0 14px 26px -10px rgba(0,0,0,.7), inset 0 -5px 0 rgba(0,0,0,.16);
-  display:grid;place-items:center;z-index:4;
-  animation:bob 6s ease-in-out infinite;animation-delay:var(--dl,0s);
+.logo-big{
+  position:absolute;left:var(--cx);top:var(--cy);translate:-50% -50%;
+  width:clamp(300px,36vw,640px);height:auto;z-index:2;
+  filter:drop-shadow(0 26px 34px rgba(60,0,10,.55));
+  animation:float 7s ease-in-out infinite;
+}
+@keyframes float{50%{translate:-50% calc(-50% - 10px)}}
+
+/* oyun kartları (genel tasarım, marka çizimi değil) */
+.gcard{
+  position:absolute;width:var(--w,clamp(66px,8vw,150px));aspect-ratio:5/7;
+  border-radius:calc(var(--w,100px) * .11);
+  background:var(--c);border:calc(var(--w,100px) * .045) solid #fff;
+  box-shadow:0 22px 34px -14px rgba(50,0,10,.7), inset 0 -8px 0 rgba(0,0,0,.14);
+  display:grid;place-items:center;
   transform:rotate(var(--r,0deg));
+  animation:bob 7s ease-in-out infinite;animation-delay:var(--dl,0s);
 }
-.fcard::after{
-  content:"";position:absolute;inset:15%;border-radius:50%;
-  background:rgba(255,255,255,.93);transform:rotate(-24deg);
+.gcard::after{
+  content:"";position:absolute;inset:14% 9%;border-radius:50%;
+  background:rgba(255,255,255,.94);transform:rotate(-24deg);
 }
-.fcard b{
+.gcard b{
   position:relative;z-index:1;font-family:var(--display);font-weight:400;
-  font-size:calc(var(--w,62px) * .34);color:var(--c);line-height:1;
+  font-size:calc(var(--w,100px) * .46);line-height:1;color:var(--c);
   transform:rotate(-24deg);letter-spacing:-.5px;
 }
-@keyframes bob{50%{translate:0 -13px}}
-
-.f1{--c:#e4002b;--w:58px;--r:-16deg;top:-14px;left:-16px;--dl:.1s}
-.f2{--c:#0072ce;--w:50px;--r:14deg;bottom:6%;left:-22px;--dl:1.1s}
-.f3{--c:#00a651;--w:54px;--r:12deg;top:16%;right:-20px;--dl:.7s}
-.f4{--c:#ffc400;--w:46px;--r:-13deg;bottom:-14px;right:8%;--dl:1.6s}
-
-/* hero alt bilgi şeridi */
-.hero-strip{
-  position:relative;z-index:3;
-  margin-top:clamp(46px,6vw,74px);
-  display:grid;grid-template-columns:repeat(4,1fr);
-  border-top:1px solid rgba(255,255,255,.1);
-  padding-top:26px;gap:16px;
+.gcard.wild{--c:#17121f}
+.gcard.wild::after{
+  background:conic-gradient(#e4002b 0 25%,#ffc400 0 50%,#00a651 0 75%,#0072ce 0);
+  border:calc(var(--w,100px) * .03) solid #fff;
 }
-.hero-strip div{display:flex;flex-direction:column;gap:3px}
-.hero-strip dt{
-  font-size:11.5px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;
-  color:rgba(253,248,239,.52);
+.gcard.wild b{color:#fff;font-size:calc(var(--w,100px) * .3);position:absolute;top:7%;left:10%;transform:none}
+@keyframes bob{50%{translate:0 -10px}}
+
+/* üst yelpaze */
+.g1{--c:#e4002b;--r:-32deg;left:26%;top:10%;--dl:.2s}
+.g2{--c:#00a651;--r:-20deg;left:33%;top:7%;--dl:1.2s}
+.g3{--c:#ffc400;--r:-8deg;left:41%;top:6%;--dl:.7s}
+.g4{--c:#0072ce;--r:4deg;left:49%;top:6%;--w:clamp(76px,9vw,170px);--dl:1.6s}
+/* sağ taraf */
+.g5{--c:#00a651;--r:24deg;left:84%;top:16%;--w:clamp(54px,6.4vw,118px);--dl:.9s}
+.g6{--c:#e4002b;--r:16deg;left:77%;top:30%;--w:clamp(64px,7.6vw,140px);--dl:1.9s}
+.g7{--r:-24deg;left:70%;top:62%;--w:clamp(90px,11vw,200px);--dl:.4s}
+.g8{--c:#ffc400;--r:-4deg;left:79%;top:70%;--w:clamp(52px,6vw,110px);--dl:1.4s}
+
+/* --- sol metin --- */
+.hero .wrap{max-width:1320px;position:relative;z-index:3;padding-inline:clamp(24px,4.6vw,64px)}
+.hero-copy{max-width:600px}
+
+.htag{
+  display:inline-block;padding:8px 14px;border-radius:8px;
+  font-size:10.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+  color:#ff7a82;background:rgba(110,0,18,.42);
+  border:1px solid rgba(255,100,110,.38);
 }
-.hero-strip dd{
-  font-family:var(--display);font-size:clamp(19px,2vw,23px);color:#fff;line-height:1.2;
+.hero h1{
+  margin:26px 0 22px;
+  font-family:var(--body);font-weight:800;text-transform:uppercase;
+  font-size:clamp(40px,4.9vw,86px);line-height:1.02;letter-spacing:-.01em;
+  text-shadow:0 6px 24px rgba(70,0,12,.45);
+}
+.hero h1 em{
+  font-style:italic;font-weight:800;color:var(--yellow);
+  text-shadow:0 6px 24px rgba(120,40,0,.4);
+}
+.hero h1 span{white-space:nowrap}
+.hero .lead{
+  max-width:440px;font-size:clamp(14px,1.18vw,17px);line-height:1.62;font-weight:500;
+  color:rgba(255,255,255,.88);
+}
+
+.hero-actions{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-top:30px}
+.hbtn{
+  display:inline-flex;align-items:center;justify-content:center;gap:12px;
+  font-size:13.5px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;
+  padding:17px 26px;border-radius:14px;white-space:nowrap;
+  transition:transform .16s var(--ease), box-shadow .16s var(--ease), background .16s, border-color .16s;
+}
+.hbtn svg{width:18px;height:18px;fill:currentColor;flex:none}
+.hbtn.yellow{
+  color:#2a1100;
+  background:linear-gradient(180deg,#ffd940,#ffb800 62%,#f0a000);
+  box-shadow:0 12px 26px -10px rgba(255,170,0,.8), inset 0 1px 0 rgba(255,255,255,.6);
+}
+.hbtn.yellow:hover{transform:translateY(-3px);box-shadow:0 18px 30px -10px rgba(255,170,0,.9), inset 0 1px 0 rgba(255,255,255,.6)}
+.hbtn.yellow:active{transform:translateY(1px)}
+.hbtn.glass{
+  color:#fff;padding:11px 26px 11px 12px;
+  background:rgba(40,6,12,.5);border:1px solid rgba(255,255,255,.17);
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+}
+.hbtn.glass:hover{background:rgba(40,6,12,.72);border-color:rgba(255,255,255,.34);transform:translateY(-3px)}
+.hbtn .play{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;
+  background:var(--red);box-shadow:0 0 0 4px rgba(228,0,43,.25)}
+.hbtn .play svg{width:13px;height:13px;margin-left:2px}
+
+.hchips{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.hchip{
+  padding:9px 15px;border-radius:999px;
+  font-size:10.5px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;
+  color:#fff;background:rgba(36,5,10,.56);border:1px solid rgba(255,255,255,.14);
+  -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+}
+.hchip.hot{color:var(--yellow);border-color:rgba(255,196,0,.8);background:rgba(70,34,0,.42)}
+
+/* sağ kenar: scroll göstergesi + köşe üçgeni */
+.scroll-hint{
+  position:absolute;right:20px;bottom:30px;z-index:4;
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  color:rgba(255,255,255,.7);
+}
+.scroll-hint .mouse{
+  width:15px;height:24px;border-radius:9px;border:1.5px solid rgba(255,255,255,.7);position:relative;
+}
+.scroll-hint .mouse::after{
+  content:"";position:absolute;left:50%;top:5px;width:2px;height:5px;border-radius:2px;
+  background:#fff;translate:-50% 0;animation:wheel 1.8s ease-in-out infinite;
+}
+@keyframes wheel{60%{translate:-50% 7px;opacity:0}}
+.scroll-hint b{
+  writing-mode:vertical-rl;font-size:9px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;
+}
+.corner{
+  position:absolute;right:0;bottom:0;z-index:4;width:0;height:0;
+  border-style:solid;border-width:0 0 24px 24px;
+  border-color:transparent transparent var(--yellow) transparent;
 }
 
 /* ============================================================
@@ -685,12 +741,29 @@ footer{background:#0b0817;color:rgba(253,248,239,.6);padding-block:56px 30px;fon
 /* ============================================================
    14. RESPONSIVE
    ============================================================ */
+@media(max-width:1180px){
+  .links a{padding:10px 15px}
+}
 @media(max-width:1040px){
-  .hero-grid{grid-template-columns:1fr;gap:44px}
-  .hero-copy{max-width:100%;text-align:center;margin-inline:auto}
-  .hero .lead{margin-inline:auto}
-  .hero-actions,.hero-note{justify-content:center}
-  .hero-art{max-width:560px;margin-inline:auto;width:100%}
+  .hero{
+    --cx:50%; --cy:54%;
+    display:block;min-height:0;
+    padding-top:calc(var(--nav) + 6px);padding-bottom:64px;
+  }
+  .stage{position:relative;inset:auto;height:clamp(300px,66vw,470px);margin-bottom:8px}
+  .logo-big{width:min(74vw,520px)}
+  .g1{left:6%;top:12%}
+  .g2{left:17%;top:4%}
+  .g3{left:30%;top:-2%}
+  .g4{left:56%;top:-4%}
+  .g5{left:84%;top:8%}
+  .g6{left:80%;top:42%}
+  .g7{left:66%;top:66%}
+  .g8{left:82%;top:76%}
+  .hero-copy{max-width:640px}
+  .hero .lead{max-width:520px}
+  .scroll-hint{display:none}
+
   .feat-grid{grid-template-columns:repeat(2,1fr)}
   .shots{grid-template-columns:repeat(2,1fr)}
   .shots .shot:last-child{display:none}
@@ -703,47 +776,60 @@ footer{background:#0b0817;color:rgba(253,248,239,.6);padding-block:56px 30px;fon
   :root{--nav:64px}
   .sticky-cta{display:flex}
   footer{padding-bottom:96px}
+  .nav .wrap{display:flex;gap:12px}
   .menu-shade{
     position:fixed;inset:var(--nav) 0 0 0;z-index:95;
-    background:rgba(18,14,34,.45);
+    background:rgba(18,4,8,.55);
     -webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);
     opacity:0;pointer-events:none;transition:opacity .3s var(--ease);
   }
   .menu-shade.show{opacity:1;pointer-events:auto}
-  .links{border-radius:0 0 22px 22px}
   .links{
     position:fixed;top:var(--nav);left:0;right:0;
-    flex-direction:column;align-items:stretch;gap:0;margin:0;
-    background:var(--paper);border-bottom:1px solid var(--line);
-    box-shadow:0 30px 44px -26px rgba(18,14,34,.6);
+    flex-direction:column;align-items:stretch;gap:2px;margin:0;
+    border-radius:0 0 22px 22px;
+    background:#1a0910;border:0;border-bottom:1px solid rgba(255,255,255,.1);
+    box-shadow:0 30px 44px -26px rgba(0,0,0,.9);
     padding:10px;max-height:0;overflow:hidden;opacity:0;
     transition:max-height .38s var(--ease),opacity .28s;
   }
   .links.open{max-height:calc(100vh - var(--nav));opacity:1;overflow-y:auto}
-  .links a{padding:14px 16px;font-size:16px;border-radius:12px}
-  .links a.active::after{display:none}
-  .links a.active{background:rgba(228,0,43,.08)}
+  .links a{padding:15px 18px;font-size:13px;border-radius:14px}
   .burger{display:grid;margin-left:auto}
   .nav-cta{margin-left:0}
   .nav-dl small{display:none}
-  .nav-dl{font-size:15px;padding:9px 16px}
-  .hero-strip{grid-template-columns:repeat(2,1fr);gap:20px 16px}
-  .fcard{display:none}
-  .art-frame{rotate:0deg}
+  .nav-dl{padding:11px 18px}
+  .nav-dl strong{font-size:12.5px}
+  .gcard{animation:none}
   .entry::before{left:calc(clamp(22px,3vw,38px) * -1 - 7px)}
 }
 @media(max-width:620px){
   body{font-size:16px}
   .wrap{padding-inline:18px}
+  .hero .wrap{padding-inline:20px}
   .feat-grid,.shots{grid-template-columns:1fr}
   .shots .shot:last-child{display:block}
   .brand b{font-size:18px}
-  .nav .wrap{gap:12px}
-  .nav-dl span.dl-txt{display:none}
+  .nav .wrap{gap:10px}
+  .nav .brand .mark{height:32px}
+  .nav-dl strong{font-size:11.5px;letter-spacing:.05em}
   .nav-dl{padding:10px 13px}
+  .stage{height:clamp(250px,78vw,340px)}
+  .logo-big{width:78vw}
+  .g1,.g5{display:none}
+  .g2{left:2%}
+  .g3{left:18%}
+  .g4{left:62%}
+  .g6{left:78%;top:38%}
+  .g7{left:60%;top:62%}
+  .g8{display:none}
+  .hero h1{font-size:clamp(34px,10.4vw,46px);margin:20px 0 16px}
+  .hero-actions{flex-direction:column;align-items:stretch;gap:12px}
+  .hbtn{width:100%}
+  .hbtn.glass{justify-content:flex-start}
+  .hchip{font-size:9.5px;padding:8px 12px}
   .btn{font-size:17.5px;padding:14px 24px;width:100%}
   .btn-ghost{width:100%}
-  .hero-actions{width:100%}
   #indir .btn-primary{font-size:19px;padding:15px 28px}
   .f-grid{grid-template-columns:1fr 1fr}
   .f-bottom{justify-content:center;text-align:center}
@@ -775,17 +861,16 @@ footer{background:#0b0817;color:rgba(253,248,239,.6);padding-block:56px 30px;fon
 <header class="nav" id="nav">
   <div class="wrap">
     <a class="brand" href="#top" aria-label="PLAYİNG UNO ana sayfa">
-      <span class="mark" data-logo-wrap><img src="assets/logo.png" alt="" data-logo></span>
+      <span class="mark"><img src="assets/logo.png" alt="" data-logo onerror="this.closest('.brand').classList.add('no-logo')"></span>
       <b data-name>PLAYİNG <span>UNO</span></b>
     </a>
 
-    <nav class="links" id="links" aria-label="Ana menü">
-      <a href="#top" class="active">Ana sayfa</a>
-      <a href="#features">Özellikler</a>
-      <a href="#preview">Ekranlar</a>
-      <a href="#install">Kurulum</a>
-      <a href="#changelog">Sürüm notları</a>
-      <a href="#faq">Destek</a>
+    <nav class="links" id="links" aria-label="Ana menü" lang="en">
+      <a href="#top" class="active">Home</a>
+      <a href="#changelog">News</a>
+      <a href="#preview">Trailer</a>
+      <a href="#features">Features</a>
+      <a href="#faq">Support</a>
     </nav>
 
     <button class="burger" id="burger" aria-label="Menüyü aç" aria-expanded="false" aria-controls="links">
@@ -794,9 +879,8 @@ footer{background:#0b0817;color:rgba(253,248,239,.6);padding-block:56px 30px;fon
 
     <div class="nav-cta">
       <a class="nav-dl" data-download href="#indir">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 3h2v9h4l-5 5-5-5h4zM5 19h14v2H5z"/></svg>
-        <span class="dl-txt">İndir</span>
-        <small data-ver>v1.0.0</small>
+        <small lang="en">PC Release</small>
+        <strong lang="en">Download Now</strong>
       </a>
     </div>
   </div>
@@ -806,59 +890,57 @@ footer{background:#0b0817;color:rgba(253,248,239,.6);padding-block:56px 30px;fon
 <main id="main">
 
 <!-- ==================== HERO ==================== -->
-<section class="hero on-dark" id="top">
+<section class="hero on-dark" id="top" lang="en">
+
+  <!-- sahne: halkalar + kartlar + büyük logo -->
+  <div class="stage" aria-hidden="true">
+    <i class="ring r1"></i><i class="ring r2"></i><i class="ring r3"></i><i class="sweep"></i>
+
+    <div class="gcard g1"><b>3</b></div>
+    <div class="gcard g2"><b>2</b></div>
+    <div class="gcard g3"><b>7</b></div>
+    <div class="gcard g4"><b>⇄</b></div>
+
+    <!-- BÜYÜK LOGO: Photoshop'tan şeffaf PNG olarak assets/uno-logo.png adıyla kaydet -->
+    <img class="logo-big" src="assets/uno-logo.png" alt="" onerror="this.remove()">
+
+    <div class="gcard g5"><b>9</b></div>
+    <div class="gcard g6"><b>1</b></div>
+    <div class="gcard g8"><b>5</b></div>
+    <div class="gcard wild g7"><b>+4</b></div>
+  </div>
+
   <div class="wrap">
-    <div class="hero-grid">
+    <div class="hero-copy">
+      <span class="htag">UNO Gameplay / Windows PC</span>
 
-      <div class="hero-copy">
-        <span class="pill">
-          <span class="dot" aria-hidden="true"></span>
-          <b>Yayında</b>
-          <span class="sep" aria-hidden="true"></span>
-          <span data-ver>v1.0.0</span> · Windows 10 / 11
-        </span>
+      <h1>Every table<br><span>has a <em>surprise.</em></span></h1>
 
-        <h1>UNO keyfi<br>artık <em>masaüstünde</em>.</h1>
+      <p class="lead">
+        Discover UNO gameplay on Windows PC. Match colors and numbers, play action cards at just the right moment, and call UNO! when only one card remains.
+      </p>
 
-        <p class="lead">
-          Klasik kurallar, hızlı eşleşme ve sıfır reklam. İndir, çift tıkla, oyna.
-          Kurulum sihirbazı yok, kayıt yok, seni bekleyen hiçbir şey yok.
-        </p>
-
-        <div class="hero-actions">
-          <a class="btn btn-primary" data-download href="#indir">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 3h2v9h4l-5 5-5-5h4zM5 19h14v2H5z"/></svg>
-            Windows için indir
-          </a>
-          <a class="btn btn-ghost" href="#install">Kurulum adımları</a>
-        </div>
-
-        <div class="hero-note">
-          <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.3 8 11 4.6-1.7 8-6 8-11V5zm-1 13-3.5-3.5 1.4-1.4L11 12.2l4.6-4.6L17 9z"/></svg> Virüs taraması temiz</span>
-          <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 2a8 8 0 0 1 6.3 12.9L5.1 5.7A8 8 0 0 1 12 4zm0 16a8 8 0 0 1-6.3-12.9l13.2 13.2A8 8 0 0 1 12 20z"/></svg> Reklamsız</span>
-          <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 3h2v9h4l-5 5-5-5h4zM5 19h14v2H5z"/></svg> <span data-size>45 MB</span></span>
-        </div>
+      <div class="hero-actions">
+        <a class="hbtn yellow" href="#changelog">
+          View PC Roadmap
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11h12.2l-4.6-4.6L13 5l7 7-7 7-1.4-1.4 4.6-4.6H4z"/></svg>
+        </a>
+        <a class="hbtn glass" href="#preview">
+          <span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4v16l13-8z"/></svg></span>
+          Watch Trailer
+        </a>
       </div>
 
-      <div class="hero-art">
-        <div class="art-glow" aria-hidden="true"></div>
-        <div class="fcard f1" aria-hidden="true"><b>7</b></div>
-        <div class="fcard f2" aria-hidden="true"><b>5</b></div>
-        <div class="fcard f3" aria-hidden="true"><b>9</b></div>
-        <div class="fcard f4" aria-hidden="true"><b>+4</b></div>
-        <div class="art-frame">
-          <img src="assets/keyart.jpg" alt="PLAYİNG UNO kapak görseli: UNO logosu ve etrafına saçılmış oyun kartları" width="716" height="333" fetchpriority="high">
-        </div>
+      <div class="hchips">
+        <span class="hchip">Windows PC</span>
+        <span class="hchip">Local &amp; Online Multiplayer</span>
+        <span class="hchip hot">Download Available</span>
       </div>
     </div>
-
-    <dl class="hero-strip">
-      <div><dt>Sürüm</dt><dd data-ver>v1.0.0</dd></div>
-      <div><dt>Boyut</dt><dd data-size>45 MB</dd></div>
-      <div><dt>Platform</dt><dd>Windows 10/11</dd></div>
-      <div><dt>Dil</dt><dd>Türkçe</dd></div>
-    </dl>
   </div>
+
+  <a class="scroll-hint" href="#features" aria-label="Aşağı kaydır"><span class="mouse"></span><b>Scroll</b></a>
+  <i class="corner" aria-hidden="true"></i>
 </section>
 
 <!-- ==================== ÖZELLİKLER ==================== -->
