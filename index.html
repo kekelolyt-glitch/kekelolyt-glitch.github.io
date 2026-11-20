@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#160b0b">
+  <meta name="description" content="UNO oyununun Windows PC sürümünü keşfet.">
+  <title>UNO — Every Table Has a Surprise</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#home" aria-label="UNO ana sayfa"><span>UNO</span></a>
+    <nav class="nav" id="nav">
+      <a class="active" href="#home">HOME</a>
+      <a href="#news">NEWS</a>
+      <a href="#trailer">TRAILER</a>
+      <a href="#features">FEATURES</a>
+      <a href="#support">SUPPORT</a>
+    </nav>
+    <a class="top-download" href="#download">PC RELEASE <strong>DOWNLOAD NOW</strong></a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Menüyü aç">☰</button>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-shade"></div>
+      <div class="hero-content">
+        <div class="eyebrow">UNO GAMEPLAY / WINDOWS PC</div>
+        <h1>EVERY TABLE<br>HAS A <em>SURPRISE</em></h1>
+        <p class="intro">Discover UNO gameplay on Windows PC. Match colors and numbers, play action cards at just the right moment, and call UNO when only one card remains.</p>
+        <div class="actions">
+          <a class="primary-btn" href="#roadmap">VIEW PC ROADMAP <span>→</span></a>
+          <a class="trailer-btn" href="#trailer"><span class="play">▶</span> WATCH TRAILER</a>
+        </div>
+        <div class="tags">
+          <span>WINDOWS PC</span><span>LOCAL &amp; ONLINE MULTIPLAYER</span>
+        </div>
+        <a class="available" href="#download">DOWNLOAD AVAILABLE</a>
+      </div>
+      <div class="scroll-cue">SCROLL TO EXPLORE <span>↓</span></div>
+    </section>
+
+    <section class="content-section" id="news">
+      <div class="section-kicker">WHAT'S NEW</div>
+      <h2>THE LATEST <em>NEWS</em></h2>
+      <p class="section-copy">Follow development updates, announcements and new features.</p>
+      <div class="news-card">
+        <div class="news-icon">UNO</div>
+        <div><span class="card-label">DEVELOPMENT UPDATE</span><h3>Something exciting is coming.</h3><p>Development news and announcements will appear here. Stay tuned!</p></div>
+      </div>
+    </section>
+
+    <section class="trailer-section" id="trailer">
+      <div class="section-kicker">SEE IT IN ACTION</div>
+      <h2>WATCH THE <em>TRAILER</em></h2>
+      <a class="video-placeholder" id="trailerLink" href="#" target="_blank" rel="noopener">
+        <span class="big-play">▶</span><span>ADD YOUR GAME TRAILER LINK IN ADMIN SETTINGS</span>
+      </a>
+    </section>
+
+    <section class="content-section features-section" id="features">
+      <div class="section-kicker">THE CLASSIC, REIMAGINED</div>
+      <h2>PLAY YOUR <em>WAY</em></h2>
+      <div class="feature-grid">
+        <article><span>01</span><h3>CLASSIC GAMEPLAY</h3><p>Match colors and numbers. Use action cards wisely and be the first to empty your hand.</p></article>
+        <article><span>02</span><h3>PLAY TOGETHER</h3><p>Bring friends to the table with local and online multiplayer options.</p></article>
+        <article><span>03</span><h3>BIG MOMENTS</h3><p>Reverse the round, skip a turn and change the color when it matters most.</p></article>
+      </div>
+    </section>
+
+    <section class="roadmap-section" id="roadmap">
+      <div><div class="section-kicker">DEVELOPMENT</div><h2>THE ROAD <em>AHEAD</em></h2><p>Follow the journey as the Windows PC version takes shape.</p></div>
+      <div class="roadmap-status"><span class="status-dot"></span> DEVELOPMENT UPDATES COMING SOON</div>
+    </section>
+
+    <section class="download-section" id="download">
+      <div class="section-kicker">READY TO PLAY?</div>
+      <h2>YOUR NEXT ROUND <em>STARTS HERE.</em></h2>
+      <p>Get the Windows PC version and join the game.</p>
+      <a class="primary-btn large" id="downloadLink" href="#" target="_blank" rel="noopener">DOWNLOAD FOR WINDOWS <span>↓</span></a>
+      <small id="downloadNote">Download link will be announced soon.</small>
+    </section>
+
+    <section class="support-section" id="support">
+      <div><div class="section-kicker">NEED A HAND?</div><h2>WE'RE HERE TO <em>HELP.</em></h2></div>
+      <a class="outline-btn" id="supportLink" href="mailto: support@example.com">CONTACT SUPPORT ↗</a>
+    </section>
+  </main>
+
+  <footer><span class="footer-logo">UNO</span><span>© <span id="year"></span> UNO GAME PROJECT. ALL RIGHTS RESERVED.</span><a href="#home">BACK TO TOP ↑</a></footer>
+
+  <!-- Hidden admin access: click the tiny mark at bottom-right or press Ctrl + Shift + A -->
+  <button class="secret-trigger" id="secretTrigger" aria-label="Admin panel"></button>
+  <div class="modal-backdrop" id="loginModal" hidden>
+    <div class="modal login-box">
+      <button class="modal-close" data-close aria-label="Kapat">×</button>
+      <div class="section-kicker">RESTRICTED AREA</div><h2>ADMIN <em>LOGIN</em></h2>
+      <p>Continue to site settings.</p>
+      <form id="loginForm"><input id="adminPassword" type="password" placeholder="Admin password" autocomplete="current-password" required><button class="primary-btn" type="submit">UNLOCK PANEL →</button><p class="error" id="loginError"></p></form>
+    </div>
+  </div>
+  <div class="modal-backdrop" id="adminModal" hidden>
+    <div class="modal admin-box">
+      <button class="modal-close" data-close aria-label="Kapat">×</button>
+      <div class="section-kicker">SITE CONTROL</div><h2>ADMIN <em>PANEL</em></h2>
+      <div class="notice"><strong>Demo mode:</strong> Changes are saved only in this browser. This password is visible in the site's source code. Do not use this as real security on a public website.</div>
+      <form id="settingsForm" class="settings-form">
+        <label>Hero title<input name="title" maxlength="90"></label>
+        <label>Hero description<textarea name="description" rows="3" maxlength="300"></textarea></label>
+        <label>Windows download URL<input name="download" type="url" placeholder="https://..."></label>
+        <label>Trailer URL<input name="trailer" type="url" placeholder="https://youtube.com/..."></label>
+        <label>Support email<input name="email" type="email" placeholder="you@example.com"></label>
+        <div class="admin-actions"><button class="primary-btn" type="submit">SAVE CHANGES</button><button class="outline-btn" type="button" id="resetSettings">RESET</button></div>
+        <p class="success" id="saveMessage"></p>
+      </form>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
